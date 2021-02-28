@@ -29,12 +29,12 @@ public:
     Rational operator*(const Rational& n);
     Rational operator/(const Rational& n);
     Rational operator-(const Rational& n);
-    bool operator==(const Rational& f);
-    bool operator<(const Rational& f);
-    bool operator<=(const Rational& f);
-    bool operator>(const Rational& f);
-    bool operator>=(const Rational& f);
-    bool operator!=(const Rational& f);
+    bool operator==(const Rational& n);
+    bool operator<(const Rational& n);
+    bool operator<=(const Rational& n);
+    bool operator>(const Rational& n);
+    bool operator>=(const Rational& n);
+    bool operator!=(const Rational& n);
     friend std::ostream& operator<<(std::ostream& out, Rational& n);
     friend std::istream& operator>>(std::istream& in, Rational& n);
     // Сокращение

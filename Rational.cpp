@@ -9,6 +9,10 @@ namespace {
     int sign(int a) {
         return a > 0 ? 1 : -1;
     }
+
+    bool isAnyNan(const Rational& n1, const Rational& n2) {
+        return n1.isNan() || n2.isNan();
+    }
 }
 
 Rational::Rational() {
@@ -46,6 +50,9 @@ Rational Rational::inv() const {
 }
 
 bool Rational::eq(const Rational& n) const {
+    if (isAnyNan(*this, n)) {
+        return false;
+    }
     return this->_numerator == n._numerator
            && this->_denominator == n._denominator;
 }
@@ -78,7 +85,8 @@ Rational Rational::sub(const Rational& n) const {
 
 
 bool Rational::lt(const Rational& n) const {
-    return this->sub(n)._numerator < 0;
+    return !isAnyNan(*this, n)
+           && this->sub(n)._numerator < 0;
 }
 
 Rational Rational::operator+(const Rational& second) {
@@ -97,28 +105,32 @@ Rational Rational::operator-(const Rational& n) {
     return this->sub(n);
 }
 
-bool Rational::operator==(const Rational& f) {
-    return this->eq(f);
+bool Rational::operator==(const Rational& n) {
+    return this->eq(n);
 }
 
-bool Rational::operator<(const Rational& f) {
-    return this->lt(f);
+bool Rational::operator<(const Rational& n) {
+    return this->lt(n);
 }
 
-bool Rational::operator<=(const Rational& f) {
-    return !(*this > f);
+bool Rational::operator<=(const Rational& n) {
+    return !isAnyNan(*this, n)
+           && !(*this > n);
 }
 
-bool Rational::operator>(const Rational& f) {
-    return !((*this < f) || (*this == f));
+bool Rational::operator>(const Rational& n) {
+    return !isAnyNan(*this, n)
+           && !((*this < n) || (*this == n));
 }
 
-bool Rational::operator>=(const Rational& f) {
-    return !(*this < f);
+bool Rational::operator>=(const Rational& n) {
+    return !isAnyNan(*this, n)
+           && !(*this < n);
 }
 
-bool Rational::operator!=(const Rational& f) {
-    return !(*this == f);
+bool Rational::operator!=(const Rational& n) {
+    return !isAnyNan(*this, n)
+           && !(*this == n);
 }
 
 
