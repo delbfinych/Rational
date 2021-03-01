@@ -21,10 +21,10 @@ Rational::Rational() {
     _denominator = 1;
 }
 
-Rational::Rational(int x, unsigned y) {
+Rational::Rational(int x, int y) {
     isNaN = y == 0;
     _numerator = x;
-    _denominator = y;
+    _denominator = std::abs(y);
     this->reduce();
 }
 

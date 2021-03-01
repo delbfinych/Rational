@@ -22,7 +22,7 @@ private:
     void print(std::ostream& out) const;
 public:
     Rational();
-    Rational(int, unsigned);
+    Rational(int, int);
     Rational(int);
 
     Rational operator+(const Rational& n);
