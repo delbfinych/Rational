@@ -9,7 +9,7 @@ private:
 
     bool isNaN;
     int _numerator;
-    unsigned _denominator;
+    int _denominator;
 
     Rational sum(const Rational&) const;
     Rational sub(const Rational&) const;

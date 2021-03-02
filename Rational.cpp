@@ -46,7 +46,7 @@ Rational Rational::reduce() {
 
 Rational Rational::inv() const {
     return {static_cast<int>(sign(_numerator) * _denominator),
-            static_cast<unsigned int>(std::abs(_numerator))};
+            static_cast<int>(std::abs(_numerator))};
 }
 
 bool Rational::eq(const Rational& n) const {
@@ -156,6 +156,7 @@ std::istream& operator>>(std::istream& in, Rational& n) {
     in >> n._numerator;
     in.ignore(1, '%');
     in >> n._denominator;
+    n._denominator = std::abs(n._denominator);
     n.isNaN = n._denominator == 0;
     n.reduce();
     return in;
